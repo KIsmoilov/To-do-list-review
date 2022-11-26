@@ -162,5 +162,3 @@ export default class UtilityFunction {
       }));
     };
 }
-
-// console.log('testing');
