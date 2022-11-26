@@ -128,4 +128,37 @@ export default class UtilityFunction {
         }
       }));
     }
+
+    static addBtnEditEvent = () => {
+      let previousList = null;
+      document.querySelectorAll('.edit_btn').forEach((button) => button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const inputID = 'TEXT';
+        const selectedID = event.currentTarget.id;
+        let concatID;
+
+        if (!selectedID.includes('TEXT')) {
+          concatID = inputID.concat(selectedID);
+        } else {
+          concatID = selectedID;
+        }
+
+        if (previousList !== null) {
+          previousList.getElementById(concatID).removeAttribute('readonly');
+        }
+
+        const listItem = event.target.closest('li');
+        previousList = listItem;
+        const ulItem = event.target.closest('ul');
+
+        listItem.style.background = 'rgb(230, 230, 184)';
+        ulItem.style.background = 'rgb(230, 230, 184)';
+
+        document.getElementById(concatID).removeAttribute('readonly');
+        document.getElementById(concatID).focus();
+        document.getElementById(concatID).style.background = 'rgb(230, 230, 184)';
+        listItem.querySelector('.edit_btn').style.display = 'none';
+        listItem.querySelector('.delete_btn').style.display = 'block';
+      }));
+    };
 }
